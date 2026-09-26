@@ -21,3 +21,11 @@
 ## Статус темы
 
 Тема находится на этапе подготовки и согласования в рамках лабораторной работы №1.
+## Документация ЛР2 — Бронь аудитории
+
+- [Описание проекта](docs/project-proposal.md)
+- [Требования ЛР1](docs/lab-01-requirements.md)
+- [ER-модель](docs/lab-02-er.md)
+- [API-контракт](docs/api-contract.md)
+- [Матрица требований](docs/requirements-matrix.md)
+- [Архитектура](docs/architecture.md)
