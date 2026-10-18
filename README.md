@@ -29,3 +29,12 @@
 - [API-контракт](docs/api-contract.md)
 - [Матрица требований](docs/requirements-matrix.md)
 - [Архитектура](docs/architecture.md)
+## Запуск клиента
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Открыть адрес Vite, обычно http://localhost:5173
