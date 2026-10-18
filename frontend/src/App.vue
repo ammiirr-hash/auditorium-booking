@@ -1,90 +1,42 @@
 <script setup>
-import { ref } from 'vue'
-
-const screen = ref('list')
-
-const items = [
-  { id: 1, number: 'B-001', title: 'Защита курсовой работы', auditoriumId: 2, status: 'New' },
-  { id: 2, number: 'B-002', title: 'Лекция для первого курса', auditoriumId: 1, status: 'InProgress' }
-]
+import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <button type="button" @click="screen = 'list'">Список</button>
-      <button type="button" @click="screen = 'new'">Создание</button>
-      <button type="button" @click="screen = 'login'">Вход</button>
-    </nav>
-  </header>
-
+  <AppHeader />
   <main>
-    <section v-if="screen === 'list'">
-      <h1>Брони аудиторий</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Номер</th>
-            <th>Тема</th>
-            <th>auditoriumId</th>
-            <th>Статус</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in items" :key="item.id">
-            <td>{{ item.number }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.auditoriumId }}</td>
-            <td>{{ item.status }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section v-else-if="screen === 'new'">
-      <h1>Создание брони</h1>
-      <form @submit.prevent>
-        <label for="title">Тема, 5–80 символов</label>
-        <input id="title" name="title" autofocus>
-
-        <label for="auditoriumId">Номер аудитории</label>
-        <input id="auditoriumId" name="auditoriumId" type="number">
-
-        <label for="description">Описание, 10–500 символов</label>
-        <textarea id="description" name="description"></textarea>
-
-        <button type="submit">Создать</button>
-      </form>
-    </section>
-
-    <section v-else-if="screen === 'login'">
-      <h1>Вход</h1>
-      <form @submit.prevent>
-        <label for="login">Логин</label>
-        <input id="login" name="login" autocomplete="username">
-
-        <label for="password">Пароль</label>
-        <input id="password" name="password" type="password" autocomplete="current-password">
-
-        <button type="submit">Войти</button>
-      </form>
-    </section>
+    <router-view />
   </main>
 </template>
 
-<style scoped>
-nav {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+<style>
+:root {
+  --accent: #4f7cff;
+  --border: rgba(128, 128, 128, 0.35);
+  --surface: rgba(128, 128, 128, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+#app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 1.6rem;
 }
 
 button {
-  padding: 8px 16px;
-  border: 1px solid rgba(128, 128, 128, 0.6);
-  border-radius: 6px;
+  padding: 9px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: transparent;
   color: inherit;
   font: inherit;
@@ -92,55 +44,57 @@ button {
 }
 
 button:hover {
-  background: rgba(128, 128, 128, 0.2);
+  background: var(--surface);
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 400px;
+  gap: 6px;
+  max-width: 440px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
 }
 
 label {
-  margin-top: 8px;
+  margin-top: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
 input,
 textarea {
-  padding: 8px;
-  border: 1px solid rgba(128, 128, 128, 0.6);
-  border-radius: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: transparent;
   color: inherit;
   font: inherit;
 }
 
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
 textarea {
-  min-height: 100px;
+  min-height: 110px;
   resize: vertical;
 }
 
 form button[type='submit'] {
-  margin-top: 12px;
+  margin-top: 16px;
   align-self: flex-start;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
 }
 
-table {
-  width: 100%;
-  max-width: 720px;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-  text-align: left;
-}
-
-th {
-  background: rgba(128, 128, 128, 0.15);
+form button[type='submit']:hover {
+  filter: brightness(1.1);
+  background: var(--accent);
 }
 </style>
